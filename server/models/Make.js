@@ -15,8 +15,30 @@ export class MakeModel {
         return await manufacturer.save();
     }
 
+    async getAll() {
+        let makes;
+
+        try {
+            makes = await Make.find();
+        } catch (e) {
+            return ApiError.internal('Server error');
+        }
+
+        if (makes.length === 0) {
+            return ApiError.notFound('None manufactures found');
+        }
+
+        return makes;
+    }
+
     async findById(_id, next) {
-        const make = await Make.findById(_id);
+        let make;
+        try {
+            make = await Make.findById(_id);
+        } catch (e) {
+            return ApiError.notFound(`Manufacture with this id doesn't exists`);
+        }
+
         if (!make) {
             return ApiError.notFound(`Manufacture with this id doesn't exists`);
         }
@@ -25,14 +47,21 @@ export class MakeModel {
     }
 
     async update(_id, name, abrv) {
-        const make = await Make.findByIdAndUpdate(
-            _id,
-            {
-                name,
-                abrv,
-            },
-            { returnDocument: 'after' },
-        );
+        let make;
+
+        try {
+            make = await Make.findByIdAndUpdate(
+                _id,
+                {
+                    name,
+                    abrv,
+                },
+                { returnDocument: 'after' },
+            );
+        } catch (e) {
+            return ApiError.notFound(`Manufacture with this id doesn't exists`);
+        }
+
         if (!make) {
             return ApiError.notFound(`Manufacture with this id doesn't exists`);
         }
@@ -41,10 +70,18 @@ export class MakeModel {
     }
 
     async delete(_id) {
-        const make = await Make.findByIdAndDelete(_id);
+        let make;
+
+        try {
+            make = await Make.findByIdAndDelete(_id);
+        } catch (e) {
+            return ApiError.notFound(`Manufacture with this id doesn't exists`);
+        }
+
         if (!make) {
             return ApiError.notFound(`Manufacture with this id doesn't exists`);
         }
+
         return make;
     }
 }
