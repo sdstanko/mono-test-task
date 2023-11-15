@@ -1,3 +1,4 @@
+import ApiError from '../error/ApiError.js';
 import { MakeModel } from '../models/Make.js';
 
 class ManufacturerController {
@@ -6,9 +7,13 @@ class ManufacturerController {
     }
 
     create = async (req, res, next) => {
-        const { name, abrv } = req.body;
-        const manufacturer = await this.model.create(name, abrv);
-        return res.json(manufacturer);
+        try {
+            const { name, abrv } = req.body;
+            const manufacturer = await this.model.create(name, abrv);
+            return res.json(manufacturer);
+        } catch (e) {
+          return next(e)
+        }
     };
 
     getAll = async (req, res) => {

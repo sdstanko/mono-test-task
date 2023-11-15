@@ -1,3 +1,4 @@
+import ApiError from '../error/ApiError.js';
 import { Model } from '../schemas/Model.js';
 import { Make } from '../schemas/Make.js';
 
@@ -5,13 +6,13 @@ export class ModelModel {
     async create(name, abrv, makeId) {
         const candidate = await Model.findOne({ name });
         if (candidate) {
-            throw new Error('already exists');
+            return ApiError.forbidden('Model with this name already exists');
         }
 
         const manufacturerElement = await Make.findOne({ _id: makeId });
 
         if (!manufacturerElement) {
-            throw new Error("manufacturer doesn't exist");
+            return ApiError.notFound('Manufacturer not found');
         }
 
         const model = new Model({
