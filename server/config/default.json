@@ -1,0 +1,5 @@
+{
+	"serverPort": "4000",
+	"dbUrl": "mongodb+srv://admin:gUcADuiDxGCpr9c3@cluster0.tfavna6.mongodb.net/?retryWrites=true&w=majority",
+	"secretKey": "Myk3y123"
+}
