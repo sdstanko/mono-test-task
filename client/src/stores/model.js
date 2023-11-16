@@ -1,7 +1,9 @@
 import { makeObservable, observable, computed, action, flow } from 'mobx';
-import axios from 'axios';
+import { Model } from '../services/modelAPI';
 
-class Model {
+const modelAPI = new Model('/models');
+
+class ModelStore {
     models = [];
     modelsPageCount = 0;
 
@@ -15,15 +17,12 @@ class Model {
     }
 
     *getModels(params) {
-        const { data } = yield axios.get(`http://localhost:4000/models?${params}`);
-        this.models = data;
+        this.models = yield modelAPI.getAll(params);
     }
 
     *getModelsPageCount() {
-        const { data } = yield axios.get(`http://localhost:4000/models`);
-        const count = Math.floor(data.length / 9);
-        this.modelsPageCount = count;
+        this.modelsPageCount = yield modelAPI.getPageCount(9);
     }
 }
 
-export default new Model();
+export default new ModelStore();

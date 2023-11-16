@@ -1,4 +1,5 @@
 import { makeObservable, observable, action } from 'mobx';
+import convertToParams from '../utils/convertToParams';
 
 class Filter {
     paramsObj = {
@@ -20,19 +21,12 @@ class Filter {
     }
 
     changePage(page) {
-        const pageParamObj = {
-            skip: page * 9,
-            limit: 9,
-        };
-        const pageParam = new URLSearchParams(pageParamObj);
-        this.paramsObj.page = pageParam;
+        this.paramsObj.page = convertToParams.convertPage(page);
         this.collectParams();
     }
 
     changeMakes(makes) {
-        const makesParam = new URLSearchParams();
-        makes.forEach(({ value }) => makesParam.append('make', value));
-        this.paramsObj.makes = makesParam;
+        this.paramsObj.makes = convertToParams.convertMakes(makes);
         this.collectParams();
     }
 
@@ -42,14 +36,7 @@ class Filter {
     }
 
     collectParams() {
-        const paramsArr = [];
-
-        for (let key in this.paramsObj) {
-            if (this.paramsObj[key]) {
-                paramsArr.push(this.paramsObj[key]);
-            }
-        }
-        this.params = paramsArr.join('&');
+        this.params = convertToParams.collectParams(this.paramsObj);
     }
 }
 
