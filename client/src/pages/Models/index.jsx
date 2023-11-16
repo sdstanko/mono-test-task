@@ -1,24 +1,17 @@
 import React from 'react';
-import List from '../../components/Grid';
-import ListItem from '../../components/ListItem';
-import styles from './Models.module.css'
+import Grid from '../../components/Grid';
+import styles from './Models.module.css';
+import { observer } from 'mobx-react-lite';
+import model from '../../stores/model';
+import FilterMenu from '../../components/FilterMenu';
 
-const Models = () => {
+const Models = observer(() => {
     return (
         <div className={styles.models}>
-            <List>
-              <ListItem/>
-              <ListItem/>
-              <ListItem/>
-              <ListItem/>
-              <ListItem/>
-              <ListItem/>
-              <ListItem/>
-              <ListItem/>
-              <ListItem/>
-            </List>
+            <FilterMenu/>
+            <Grid />
         </div>
     );
-};
+});
 
 export default Models;

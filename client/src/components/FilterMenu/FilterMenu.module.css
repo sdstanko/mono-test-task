@@ -1,0 +1,14 @@
+.filter {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 15px;
+	gap: 15px;
+}
+
+.filter__item {
+	flex: 0 1 200px;
+}
+
+.filter__item_big {
+	flex: 0 1 300px;
+}

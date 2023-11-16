@@ -1,8 +1,8 @@
 import React from 'react';
 import Button from '../UI/Button';
-import styles from './ListItem.module.css';
+import styles from './GridItem.module.css';
 
-const ListItem = () => {
+const GridItem = ({ item }) => {
     return (
         <div className={styles.item}>
             <div className={styles.photo}>
@@ -14,8 +14,8 @@ const ListItem = () => {
             </div>
             <div className={styles.item__body}>
                 <div className={styles.item__text}>
-                    <span className={styles.title}>BMW</span>
-                    <span className={styles.subtitle}>5 series</span>
+                    <span className={styles.title}>{item.abrv}</span>
+                    {item.name && <span className={styles.subtitle}>{item.name}</span>}
                 </div>
                 <Button>Edit</Button>
             </div>
@@ -23,4 +23,4 @@ const ListItem = () => {
     );
 };
 
-export default ListItem;
+export default GridItem;
