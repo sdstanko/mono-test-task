@@ -23,7 +23,7 @@ const FilterMenu = observer(() => {
                 onChange={({ value }) => filter.changeSort(value)}
                 options={sortOptions}
                 className={styles.filter__item}
-                defaultValue={sortOptions[0]}
+                defaultValue={sortOptions[3]}
                 isSearchable={false}
                 styles={{
                     option: (baseStyles, state) => ({

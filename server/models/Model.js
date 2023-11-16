@@ -38,24 +38,13 @@ export class ModelModel {
         }
 
         try {
-            models = await Model.find().skip(skip).limit(limit);
-
-            if (makes.length) {
-                models = await Model.find({ abrv: { $in: makes } })
-                    .skip(skip)
-                    .limit(limit);
-            }
+            models = await Model.find(makes.length ? { abrv: { $in: makes } } : {})
+                .skip(skip)
+                .limit(limit)
+                .sort({ _id: -1 });
 
             if (sortByWordNum != null) {
-                models = await Model.find()
-                    .skip(skip)
-                    .limit(limit)
-                    .sort({ name: sortByWordNum })
-                    .collation({ locale: 'en', numericOrdering: true });
-            }
-
-            if (makes.length && sortByWordNum != null) {
-                models = await Model.find({ abrv: { $in: makes } })
+                models = await Model.find(makes.length ? { abrv: { $in: makes } } : {})
                     .skip(skip)
                     .limit(limit)
                     .sort({ name: sortByWordNum })
@@ -64,10 +53,16 @@ export class ModelModel {
 
             if (!sortByWord && sortByTime) {
                 if (sortByTime === 'desc') {
-                    models.reverse();
+                    models = await Model.find(makes.length ? { abrv: { $in: makes } } : {})
+                        .skip(skip)
+                        .limit(limit)
+                        .sort({ _id: -1 });
+                } else if (sortByTime === 'asc') {
+                    models = await Model.find(makes.length ? { abrv: { $in: makes } } : {})
+                        .skip(skip)
+                        .limit(limit);
                 }
             }
-
         } catch (e) {}
 
         if (models.length === 0) {
