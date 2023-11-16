@@ -12,7 +12,14 @@ class ModelController {
     };
 
     getAll = async (req, res, next) => {
-        const models = await this.model.getAll();
+        const params = new URLSearchParams(req._parsedUrl.query);
+        const skip = params.get('skip');
+        const limit = params.get('limit');
+        const makes = params.getAll('make');
+        const sortByWord = params.get('sortByWord')
+        const sortByTime = params.get('sortByTime')
+
+        const models = await this.model.getAll(skip, limit, makes, sortByWord, sortByTime);
         return res.json(models);
     };
 

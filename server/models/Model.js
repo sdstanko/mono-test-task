@@ -27,15 +27,53 @@ export class ModelModel {
         return await model.save();
     }
 
-    async getAll() {
+    async getAll(skip, limit, makes, sortByWord, sortByTime) {
+        let sortByWordNum = null;
         let models;
+
+        if (sortByWord === 'asc') {
+            sortByWordNum = 1;
+        } else if (sortByWord === 'desc') {
+            sortByWordNum = -1;
+        }
+
         try {
-            models = await Model.find();
+            models = await Model.find().skip(skip).limit(limit);
+
+            if (makes.length) {
+                models = await Model.find({ abrv: { $in: makes } })
+                    .skip(skip)
+                    .limit(limit);
+            }
+
+            if (sortByWordNum != null) {
+                models = await Model.find()
+                    .skip(skip)
+                    .limit(limit)
+                    .sort({ name: sortByWordNum })
+                    .collation({ locale: 'en', numericOrdering: true });
+            }
+
+            if (makes.length && sortByWordNum != null) {
+                models = await Model.find({ abrv: { $in: makes } })
+                    .skip(skip)
+                    .limit(limit)
+                    .sort({ name: sortByWordNum })
+                    .collation({ locale: 'en', numericOrdering: true });
+            }
+
+            if (!sortByWord && sortByTime) {
+                if (sortByTime === 'desc') {
+                    models.reverse();
+                }
+            }
+
         } catch (e) {}
 
         if (models.length === 0) {
             return ApiError.notFound(`Models not found`);
         }
+
         return models;
     }
 
