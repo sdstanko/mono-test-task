@@ -30,7 +30,7 @@ class ModelStore {
     }
 
     *getModelsPageCount() {
-        this.modelsPageCount = yield modelAPI.getPageCount(9);
+        this.modelsPageCount = yield modelAPI.getPageCount(filter.paramsForPageCount, 9);
     }
 
     *createModel(data) {

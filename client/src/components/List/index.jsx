@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import ListItem from '../ListItem';
-import styles from './List.module.css';
 import { observer } from 'mobx-react-lite';
 import make from '../../stores/make';
+import ListItem from '../ListItem';
+import styles from './List.module.css';
 
 const List = observer(() => {
     useEffect(() => {

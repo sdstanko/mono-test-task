@@ -9,6 +9,7 @@ class Filter {
     };
 
     params = 'limit=9';
+    paramsForPageCount = '';
 
     constructor() {
         makeObservable(this, {
@@ -36,7 +37,9 @@ class Filter {
     }
 
     collectParams() {
-        this.params = convertToParams.collectParams(this.paramsObj);
+        const { params, paramsForPageCount } = convertToParams.collectParams(this.paramsObj);
+        this.params = params;
+        this.paramsForPageCount = paramsForPageCount;
     }
 }
 

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Select from 'react-select';
 import { observer } from 'mobx-react-lite';
 import styles from './FilterMenu.module.css';
 import make from '../../stores/make';

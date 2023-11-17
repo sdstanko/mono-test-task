@@ -16,13 +16,24 @@ class ConvertToParams {
 
     collectParams(paramsObj) {
         const paramsArr = [];
+        const paramsArrNoSkip = [];
 
         for (let key in paramsObj) {
             if (paramsObj[key]) {
                 paramsArr.push(paramsObj[key]);
+
+                if (key !== 'page') {
+                    paramsArrNoSkip.push(paramsObj[key]);
+                }
             }
         }
-        return paramsArr.join('&');
+
+        const result = {
+            params: paramsArr.join('&'),
+            paramsForPageCount: paramsArrNoSkip.join('&'),
+        };
+        
+        return result;
     }
 }
 

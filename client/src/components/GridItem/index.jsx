@@ -1,8 +1,8 @@
 import React from 'react';
-import Button from '../UI/Button';
-import styles from './GridItem.module.css';
 import { useNavigate } from 'react-router-dom';
 import model from '../../stores/model';
+import Button from '../UI/Button';
+import styles from './GridItem.module.css';
 
 const GridItem = ({ item }) => {
     const navigate = useNavigate();
@@ -26,7 +26,9 @@ const GridItem = ({ item }) => {
                     {item.name && <span className={styles.subtitle}>{item.name}</span>}
                 </div>
                 <div className={styles.item__buttons}>
-                    <Button onClickAction={() => navigate(`/create/models/${item._id}`)}>Edit</Button>
+                    <Button onClickAction={() => navigate(`/create/models/${item._id}`)}>
+                        Edit
+                    </Button>
                     <Button onClickAction={() => model.deleteModel(item._id)} action="delete">
                         Delete
                     </Button>

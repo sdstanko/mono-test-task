@@ -1,10 +1,9 @@
-import React from 'react';
-import styles from './Grid.module.css';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
+import styles from './Grid.module.css';
 import model from '../../stores/model';
-import GridItem from '../GridItem';
-import { useEffect } from 'react';
 import filter from '../../stores/filter';
+import GridItem from '../GridItem';
 
 const Grid = observer(() => {
 

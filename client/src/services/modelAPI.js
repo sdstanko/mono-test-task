@@ -5,9 +5,9 @@ export class Model extends Base {
         super(endpoint);
     }
 
-    async getPageCount(limit) {
-        const models = await this.getAll();
-        return Math.floor(models.length / limit);
+    async getPageCount(params, limit) {
+        const models = await this.getAll(params);
+        return Math.ceil(models.length / limit);
     }
 
     async createModel(data) {

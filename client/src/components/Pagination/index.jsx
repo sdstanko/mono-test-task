@@ -1,20 +1,22 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import model from '../../stores/model';
+import filter from '../../stores/filter';
 import styles from './Pagination.module.css';
 import { useState } from 'react';
-import filter from '../../stores/filter';
 
 const Pagination = observer(() => {
-    useEffect(() => {
-        if (!model.modelsPageCount) {
-            model.getModelsPageCount();
-        }
-    }, []);
-
-    const arrayToMapButtons = [...Array(model.modelsPageCount).keys()];
-
     const [activeBtn, setActiveBtn] = useState(0);
+    const [pagesCountArray, setPagesCountArray] = useState([]);
+
+    useEffect(() => {
+        getCountAndSetState();
+    }, [model.models]);
+
+    const getCountAndSetState = async () => {
+        await model.getModelsPageCount();
+        setPagesCountArray([...Array(model.modelsPageCount).keys()]);
+    };
 
     const clickHandler = (i) => {
         setActiveBtn(i);
@@ -23,7 +25,7 @@ const Pagination = observer(() => {
 
     return (
         <div className={styles.pagination}>
-            {arrayToMapButtons.map((el) => (
+            {pagesCountArray.map((el) => (
                 <button
                     onClick={() => clickHandler(el)}
                     className={
