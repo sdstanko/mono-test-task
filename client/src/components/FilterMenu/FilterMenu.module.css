@@ -1,7 +1,8 @@
 .filter {
 	display: flex;
-	justify-content: space-between;
-	margin-top: 15px;
+	justify-content: flex-end;
+	flex: 1 1 auto;
+	gap: 15px;
 }
 
 .filter__item {
@@ -10,11 +11,4 @@
 
 .filter__item_big {
 	flex: 0 1 300px;
-}
-
-.filter__selects {
-	display: flex;
-	flex: 1 1 auto;
-	justify-content: flex-end;
-	gap: 15px;
 }
