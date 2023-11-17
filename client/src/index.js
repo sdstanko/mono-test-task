@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Models from './pages/Models';
+import Makes from './pages/Makes';
 import Container from './layout';
 import Create from './pages/Create';
 
@@ -16,15 +17,19 @@ const router = createBrowserRouter([
                 element: <Models />,
             },
             {
-                path: '/brands',
-                element: <Models />,
+                path: '/makes',
+                element: <Makes />,
             },
             {
-                path: '/create',
+                path: '/create/makes',
                 element: <Create />,
             },
             {
-                path: '/create/:id',
+                path: '/create/models',
+                element: <Create />,
+            },
+            {
+                path: '/create/models/:id',
                 element: <Create />,
             },
         ],

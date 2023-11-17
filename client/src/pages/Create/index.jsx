@@ -1,15 +1,21 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import CreateForm from '../../components/CreateForm';
-import { form } from '../../components/CreateForm/formObjects';
+import { useLocation, useParams } from 'react-router-dom';
+import CreateModelForm from '../../components/CreateModelForm';
+import CreateMakeForm from '../../components/CreateMakeForm';
 import styles from './Create.module.css';
 
 const Create = () => {
-    const params = useParams()
+    const params = useParams();
+    const location = useLocation();
+    const locationArr = location.pathname.split('/');
 
     return (
         <div className={styles.create}>
-            <CreateForm form={form} id={params?.id}/>
+            {locationArr.includes('models') ? (
+                <CreateModelForm id={params?.id} />
+            ) : locationArr.includes('makes') ? (
+                <CreateMakeForm />
+            ) : null}
         </div>
     );
 };

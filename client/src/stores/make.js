@@ -10,11 +10,16 @@ class MakeStore {
         makeObservable(this, {
             makes: observable,
             getMakes: flow,
+            createMake: flow,
         });
     }
 
     *getMakes() {
         this.makes = yield makeAPI.getAll();
+    }
+
+    *createMake(data) {
+        return yield makeAPI.create(data);
     }
 }
 

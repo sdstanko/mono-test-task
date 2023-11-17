@@ -21,7 +21,7 @@ const FilterMenu = observer(() => {
 
     return (
         <div className={styles.filter}>
-            <Link to="/create">
+            <Link to="/create/models">
                 <Button>Create model</Button>
             </Link>
             <div className={styles.filter__selects}>

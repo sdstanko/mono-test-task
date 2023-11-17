@@ -11,8 +11,8 @@ const Header = () => {
 				<Link to="models">
 					<Button>Models</Button>
 				</Link>
-				<Link to="brands">
-					<Button>Brands</Button>
+				<Link to="makes">
+					<Button>Makes</Button>
 				</Link>
             </nav>
         </header>

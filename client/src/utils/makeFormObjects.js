@@ -1,26 +1,18 @@
 import yup from 'mobx-react-form/lib/validators/YUP';
 import * as $pkg from 'yup';
 import MobxReactForm from 'mobx-react-form';
-import model from '../../stores/model';
+import make from '../stores/make';
 
 const fields = [
     {
         name: 'name',
         label: 'Name',
-        placeholder: 'Insert model name',
+        placeholder: 'Insert make name',
     },
     {
-        name: 'make',
-        label: 'Make',
-    },
-    {
-        name: 'picture',
-        label: 'Picture',
-        placeholder: 'Insert image URL',
-    },
-    {
-        name: 'id',
-        label: 'Id',
+        name: 'abrv',
+        label: 'Abbreviation',
+        placeholder: 'Insert make abbreviation',
     },
 ];
 
@@ -28,14 +20,14 @@ const $schema = (y) =>
     y.object().shape({
         name: y
             .string()
-            .min(2, 'must be atleast 1 symbol')
+            .min(1, 'must be atleast 1 symbol')
             .max(50, 'Too Long!')
             .required('Required'),
-        make: y.object(),
-        picture: y
-            .string(),
-           
-        id: y.string(),
+        abrv: y
+            .string()
+            .min(1, 'must be atleast 1 symbol')
+            .max(50, 'Too Long!')
+            .required('Required'),
     });
 
 const plugins = {
@@ -53,14 +45,10 @@ const hooks = {
         const values = form.values();
         let response;
 
-        if (values.id) {
-            response = await model.updateModel(values);
-        } else {
-            response = await model.createModel(values);
-        }
+        response = await make.createMake(values);
 
         if (response._id) {
-            alert(values.id ? 'Model updated' : 'Model created');
+            alert('Make created');
         } else {
             alert(response.message);
         }

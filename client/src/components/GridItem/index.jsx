@@ -26,7 +26,7 @@ const GridItem = ({ item }) => {
                     {item.name && <span className={styles.subtitle}>{item.name}</span>}
                 </div>
                 <div className={styles.item__buttons}>
-                    <Button onClickAction={() => navigate(`/create/${item._id}`)}>Edit</Button>
+                    <Button onClickAction={() => navigate(`/create/models/${item._id}`)}>Edit</Button>
                     <Button onClickAction={() => model.deleteModel(item._id)} action="delete">
                         Delete
                     </Button>
