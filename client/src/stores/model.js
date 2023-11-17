@@ -12,6 +12,7 @@ class ModelStore {
             modelsPageCount: observable,
             models: observable,
             getModels: flow,
+            createModel: flow,
             getModelsPageCount: flow,
         });
     }
@@ -22,6 +23,11 @@ class ModelStore {
 
     *getModelsPageCount() {
         this.modelsPageCount = yield modelAPI.getPageCount(9);
+    }
+
+    *createModel(data) {
+        const model = yield modelAPI.createModel(data);
+        return model
     }
 }
 

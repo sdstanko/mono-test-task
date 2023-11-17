@@ -7,7 +7,7 @@ const SelectWrapper = observer(({ options, field }) => {
     return (
         <>
             <Select
-                onChange={({ value }) => field.onChange(value)}
+                {...field.bind()}
                 options={options}
                 isSearchable={false}
                 styles={{
@@ -18,7 +18,7 @@ const SelectWrapper = observer(({ options, field }) => {
                     }),
                 }}
             />
-            <input className="visually-hidden" type="text" {...field.bind()} />
+            <input className="visually-hidden" type="text" />
         </>
     );
 });

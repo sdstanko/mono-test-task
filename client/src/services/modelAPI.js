@@ -9,4 +9,12 @@ export class Model extends Base {
         const models = await this.getAll();
         return Math.floor(models.length / limit);
     }
+
+    async createModel(data) {
+        const {name, make, picture} = data;
+        const makeId = make.value
+
+        const model = await this.create({name, makeId, picture})
+        return model
+    }
 }

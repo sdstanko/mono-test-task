@@ -10,4 +10,9 @@ export class Base {
         const { data } = await axios.get(baseUrl + this.endpoint + (params ? `?${params}` : ''));
         return data;
     }
+
+    async create(data) {
+        const { data: responseData } = await axios.post(baseUrl + this.endpoint, data);
+        return responseData;
+    }
 }

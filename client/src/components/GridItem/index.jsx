@@ -8,7 +8,10 @@ const GridItem = ({ item }) => {
             <div className={styles.photo}>
                 <img
                     className={styles.picture}
-                    src="https://www.motortrend.com/uploads/2023/05/2024-bmw-5-series-17.jpeg?fit=around%7C875:492"
+                    src={
+                        item.picture ??
+                        'https://t4.ftcdn.net/jpg/00/89/55/15/360_F_89551596_LdHAZRwz3i4EM4J0NHNHy2hEUYDfXc0j.jpg'
+                    }
                     alt=""
                 />
             </div>

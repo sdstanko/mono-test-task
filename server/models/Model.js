@@ -3,7 +3,7 @@ import { Model } from '../schemas/Model.js';
 import { Make } from '../schemas/Make.js';
 
 export class ModelModel {
-    async create(name, makeId) {
+    async create(name, makeId, picture) {
         const candidate = await Model.findOne({ name });
         if (candidate) {
             return ApiError.forbidden('Model with this name already exists');
@@ -19,6 +19,7 @@ export class ModelModel {
             name,
             abrv: make.abrv,
             makeId,
+            picture,
         });
 
         make.models.push(model._id);

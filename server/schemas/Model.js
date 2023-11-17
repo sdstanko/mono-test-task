@@ -3,7 +3,8 @@ import { Schema, model, ObjectId } from 'mongoose';
 const ModelSchema = new Schema({
     makeId: { type: ObjectId, ref: 'Make', required: true },
     name: { type: String, required: true },
-    abrv: { type: String }
+    abrv: { type: String },
+    picture: { type: String }
 });
 
 export const Model = model('Model', ModelSchema);

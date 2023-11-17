@@ -22,10 +22,9 @@ const CreateForm = observer(({ form }) => {
                 <label htmlFor={form.$('make').id}>{form.$('make').label}</label>
                 <SelectWrapper
                     field={form.$('make')}
-                    options={make.makes.map(({ abrv }) => ({ value: abrv, label: abrv }))}
+                    options={make.makes.map(({ _id, abrv }) => ({ value: _id, label: abrv }))}
                     className={styles.select}
                 />
-                <p className={styles.error}>{form.$('make').error}</p>
             </div>
 
             <div>

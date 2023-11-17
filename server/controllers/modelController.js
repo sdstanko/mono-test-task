@@ -6,8 +6,8 @@ class ModelController {
     }
 
     create = async (req, res, next) => {
-        const { name, makeId } = req.body;
-        const modelItem = await this.model.create(name, makeId);
+        const { name, makeId, picture } = req.body;
+        const modelItem = await this.model.create(name, makeId, picture);
         return res.json(modelItem);
     };
 

@@ -1,6 +1,7 @@
 import yup from 'mobx-react-form/lib/validators/YUP';
 import * as $pkg from 'yup';
 import MobxReactForm from 'mobx-react-form';
+import model from '../../stores/model';
 
 
 const fields = [
@@ -27,7 +28,7 @@ const $schema = (y) =>
             .min(2, 'must be atleast 2 symbols')
             .max(50, 'Too Long!')
             .required('Required'),
-        make: y.string().required('Required'),
+        make: y.object(),
         picture: y
             .string()
             .matches(
@@ -47,10 +48,12 @@ const plugins = {
 };
 
 const hooks = {
-    onSuccess(form) {
-        alert('Form is valid! Send the request here.');
-        // get field values
-        console.log('Form Values!', form.values());
+    async onSuccess(form) {
+		const response = await model.createModel(form.values())
+        if (response._id) {
+            alert('Model created')
+            form.reset()
+        }
     },
     onError(form) {
         alert('Form has errors!');
