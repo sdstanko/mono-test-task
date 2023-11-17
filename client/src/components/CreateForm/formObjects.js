@@ -28,16 +28,13 @@ const $schema = (y) =>
     y.object().shape({
         name: y
             .string()
-            .min(2, 'must be atleast 2 symbols')
+            .min(2, 'must be atleast 1 symbol')
             .max(50, 'Too Long!')
             .required('Required'),
         make: y.object(),
         picture: y
-            .string()
-            .matches(
-                /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-                'Enter correct url!',
-            ),
+            .string(),
+           
         id: y.string(),
     });
 
@@ -61,14 +58,13 @@ const hooks = {
         } else {
             response = await model.createModel(values);
         }
-        
+
         if (response._id) {
             alert(values.id ? 'Model updated' : 'Model created');
-            form.reset();
         } else {
-            alert(response.message)
+            alert(response.message);
         }
-        
+        form.reset();
     },
     onError(form) {
         alert('Form has errors!');

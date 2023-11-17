@@ -1,10 +1,15 @@
 .button {
-	font-size: 14px;
-	font-family: inherit;
-	color: #6b9080;
-	background-color: #eaf4f4;
-	border: 1px solid #6b9080;
-	cursor: pointer;
-	min-width: 100px;
-	padding: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #6b9080;
+    background-color: #eaf4f4;
+    border: 1px solid #6b9080;
+    cursor: pointer;
+    min-width: 100px;
+    padding: 10px;
+}
+
+.delete {
+    border-color: rgb(106, 12, 12);
+    color: rgb(106, 12, 12);
 }

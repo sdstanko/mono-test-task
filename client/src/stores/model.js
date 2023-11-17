@@ -1,5 +1,6 @@
 import { makeObservable, observable, computed, action, flow } from 'mobx';
 import { Model } from '../services/modelAPI';
+import filter from './filter';
 
 const modelAPI = new Model('/models');
 
@@ -14,6 +15,7 @@ class ModelStore {
             getModels: flow,
             createModel: flow,
             updateModel: flow,
+            deleteModel: flow,
             getModelsPageCount: flow,
             getModelById: flow,
         });
@@ -38,6 +40,12 @@ class ModelStore {
 
     *updateModel(data) {
         const model = yield modelAPI.updateModel(data);
+        return model;
+    }
+
+    *deleteModel(id) {
+        const model = yield modelAPI.deleteModel(id);
+        yield this.getModels(filter.params);
         return model;
     }
 }

@@ -46,3 +46,8 @@
 .subtitle {
     font-size: 16px;
 }
+
+.item__buttons {
+	display: flex;
+	gap: 5px;
+}

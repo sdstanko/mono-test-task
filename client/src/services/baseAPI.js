@@ -25,4 +25,9 @@ export class Base {
         const { data: responseData } = await axios.patch(baseUrl + this.endpoint + '/' + id, data);
         return responseData;
     }
+
+    async delete(id) {
+        const { data: responseData } = await axios.delete(baseUrl + this.endpoint + '/' + id);
+        return responseData;
+    }
 }

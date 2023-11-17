@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../UI/Button';
 import styles from './GridItem.module.css';
 import { useNavigate } from 'react-router-dom';
+import model from '../../stores/model';
 
 const GridItem = ({ item }) => {
     const navigate = useNavigate();
@@ -12,8 +13,9 @@ const GridItem = ({ item }) => {
                 <img
                     className={styles.picture}
                     src={
-                        item.picture ??
-                        'https://t4.ftcdn.net/jpg/00/89/55/15/360_F_89551596_LdHAZRwz3i4EM4J0NHNHy2hEUYDfXc0j.jpg'
+                        item.picture
+                            ? item.picture
+                            : 'https://t4.ftcdn.net/jpg/00/89/55/15/360_F_89551596_LdHAZRwz3i4EM4J0NHNHy2hEUYDfXc0j.jpg'
                     }
                     alt=""
                 />
@@ -23,9 +25,12 @@ const GridItem = ({ item }) => {
                     <span className={styles.title}>{item.abrv}</span>
                     {item.name && <span className={styles.subtitle}>{item.name}</span>}
                 </div>
-                <Button onClickAction={() => navigate(`/create/${item._id}`)}>
-                    Edit
-                </Button>
+                <div className={styles.item__buttons}>
+                    <Button onClickAction={() => navigate(`/create/${item._id}`)}>Edit</Button>
+                    <Button onClickAction={() => model.deleteModel(item._id)} action="delete">
+                        Delete
+                    </Button>
+                </div>
             </div>
         </div>
     );

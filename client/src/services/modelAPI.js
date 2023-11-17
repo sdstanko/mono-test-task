@@ -11,18 +11,27 @@ export class Model extends Base {
     }
 
     async createModel(data) {
-        const {name, make, picture} = data;
-        const makeId = make.value
+        const { name, make, picture } = data;
+        const makeId = make.value;
 
-        const model = await this.create({name, makeId, picture})
-        return model
+        const model = await this.create({ name, makeId, picture });
+        return model;
     }
 
     async updateModel(data) {
-        const {id, name, make, picture} = data;
-        const makeId = make.value
+        const { id, name, make, picture } = data;
+        const makeId = make.value;
 
-        const model = await this.update(id, {name, makeId, picture})
-        return model
+        const model = await this.update(id, { name, makeId, picture });
+        return model;
+    }
+
+    async deleteModel(id) {
+        const confirm = window.confirm('Are you sure?');
+        if (confirm) {
+            const model = await this.delete(id);
+            return model;
+        }
+        return;
     }
 }

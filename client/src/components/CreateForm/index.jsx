@@ -15,6 +15,8 @@ const CreateForm = observer(({ form, id }) => {
 
         if (id) {
             model.getModelById(id).then((item) => setItem(item));
+        } else {
+            form.reset()
         }
     }, []);
 
