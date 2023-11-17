@@ -1,8 +1,11 @@
 import React from 'react';
 import Button from '../UI/Button';
 import styles from './GridItem.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const GridItem = ({ item }) => {
+    const navigate = useNavigate();
+
     return (
         <div className={styles.item}>
             <div className={styles.photo}>
@@ -20,7 +23,9 @@ const GridItem = ({ item }) => {
                     <span className={styles.title}>{item.abrv}</span>
                     {item.name && <span className={styles.subtitle}>{item.name}</span>}
                 </div>
-                <Button>Edit</Button>
+                <Button onClickAction={() => navigate(`/create/${item._id}`)}>
+                    Edit
+                </Button>
             </div>
         </div>
     );

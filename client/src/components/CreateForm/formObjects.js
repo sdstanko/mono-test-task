@@ -3,7 +3,6 @@ import * as $pkg from 'yup';
 import MobxReactForm from 'mobx-react-form';
 import model from '../../stores/model';
 
-
 const fields = [
     {
         name: 'name',
@@ -18,6 +17,10 @@ const fields = [
         name: 'picture',
         label: 'Picture',
         placeholder: 'Insert image URL',
+    },
+    {
+        name: 'id',
+        label: 'Id',
     },
 ];
 
@@ -35,6 +38,7 @@ const $schema = (y) =>
                 /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
                 'Enter correct url!',
             ),
+        id: y.string(),
     });
 
 const plugins = {
@@ -49,11 +53,22 @@ const plugins = {
 
 const hooks = {
     async onSuccess(form) {
-		const response = await model.createModel(form.values())
-        if (response._id) {
-            alert('Model created')
-            form.reset()
+        const values = form.values();
+        let response;
+
+        if (values.id) {
+            response = await model.updateModel(values);
+        } else {
+            response = await model.createModel(values);
         }
+        
+        if (response._id) {
+            alert(values.id ? 'Model updated' : 'Model created');
+            form.reset();
+        } else {
+            alert(response.message)
+        }
+        
     },
     onError(form) {
         alert('Form has errors!');

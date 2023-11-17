@@ -11,8 +11,18 @@ export class Base {
         return data;
     }
 
+    async getById(id) {
+        const { data } = await axios.get(baseUrl + this.endpoint + '/' + id);
+        return data;
+    }
+
     async create(data) {
         const { data: responseData } = await axios.post(baseUrl + this.endpoint, data);
+        return responseData;
+    }
+
+    async update(id, data) {
+        const { data: responseData } = await axios.patch(baseUrl + this.endpoint + '/' + id, data);
         return responseData;
     }
 }

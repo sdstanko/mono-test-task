@@ -17,4 +17,12 @@ export class Model extends Base {
         const model = await this.create({name, makeId, picture})
         return model
     }
+
+    async updateModel(data) {
+        const {id, name, make, picture} = data;
+        const makeId = make.value
+
+        const model = await this.update(id, {name, makeId, picture})
+        return model
+    }
 }
