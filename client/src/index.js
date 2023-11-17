@@ -4,6 +4,7 @@ import './index.css';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Models from './pages/Models';
 import Container from './layout';
+import Create from './pages/Create';
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
             {
                 path: '/brands',
                 element: <Models />,
+            },
+            {
+                path: '/create',
+                element: <Create />,
             },
         ],
     },
