@@ -8,15 +8,22 @@ import Button from '../UI/Button';
 import { useState } from 'react';
 import FormInput from '../FormInput';
 import { form } from './modelFormObjects';
+import { useNavigate } from 'react-router-dom';
 
 const CreateModelForm = observer(({ id }) => {
     const [item, setItem] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         make.getMakes();
 
         if (id) {
-            model.getModelById(id).then((item) => setItem(item));
+            model.getModelById(id).then((item) => {
+                if (item?.status === 404) {
+                    navigate('/create/models');
+                }
+                setItem(item);
+            });
         } else {
             form.reset();
         }

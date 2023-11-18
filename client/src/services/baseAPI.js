@@ -9,6 +9,9 @@ export class Base {
 
     async getAll(params) {
         const { data } = await axios.get(this.url + (params ? `?${params}` : ''));
+        if (data?.status === 404) {
+            return []
+        }
         return data;
     }
 

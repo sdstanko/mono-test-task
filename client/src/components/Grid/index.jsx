@@ -6,16 +6,17 @@ import filter from '../../stores/filter';
 import GridItem from '../GridItem';
 
 const Grid = observer(() => {
-
     useEffect(() => {
         model.getModels(filter.params);
-    }, [filter.params])
+    }, [filter.params]);
 
     return (
         <div className={styles.grid}>
-            {model.models.map((el, i) => (
-                <GridItem item={el} key={i}/>
-            ))}
+            {model.models.length ? (
+                model.models.map((el, i) => <GridItem item={el} key={i} />)
+            ) : (
+                <h1>No models found...</h1>
+            )}
         </div>
     );
 });

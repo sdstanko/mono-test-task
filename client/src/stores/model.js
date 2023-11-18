@@ -48,6 +48,7 @@ class ModelStore {
         yield this.getModels(filter.params);
         return model;
     }
+
 }
 
 export default new ModelStore();
