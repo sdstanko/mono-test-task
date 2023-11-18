@@ -7,7 +7,7 @@ import styles from './CreateForm.module.css';
 import Button from '../UI/Button';
 import { useState } from 'react';
 import FormInput from '../FormInput';
-import { form } from './modelFormObjects';
+import { form } from '../../utils/modelFormObjects';
 import { useNavigate } from 'react-router-dom';
 
 const CreateModelForm = observer(({ id }) => {

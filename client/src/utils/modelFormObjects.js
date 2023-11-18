@@ -1,7 +1,7 @@
 import yup from 'mobx-react-form/lib/validators/YUP';
 import * as $pkg from 'yup';
 import MobxReactForm from 'mobx-react-form';
-import model from '../../stores/model';
+import model from '../stores/model';
 
 const fields = [
     {
