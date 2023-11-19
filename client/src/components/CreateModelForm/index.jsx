@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import MakeStore from '../../stores/MakeStore';
-import ModelStore from '../../stores/ModelStore';
+import makeStore from '../../stores/MakeStore';
+import modelStore from '../../stores/ModelStore';
 import SelectWrapper from '../SelectWrapper';
 import styles from './CreateForm.module.css';
 import Button from '../UI/Button';
@@ -14,10 +14,10 @@ const CreateModelForm = observer(({ id }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        MakeStore.getMakes();
+        makeStore.getMakes();
 
         if (id) {
-            ModelStore.getModelById(id).then((item) => {
+            modelStore.getModelById(id).then((item) => {
                 if (item?.status === 404) {
                     navigate('/create/models');
                 }
@@ -45,7 +45,7 @@ const CreateModelForm = observer(({ id }) => {
                 <label htmlFor={form.$('make').id}>{form.$('make').label}</label>
                 <SelectWrapper
                     field={form.$('make')}
-                    options={MakeStore.makes.map(({ _id, abrv }) => ({ value: _id, label: abrv }))}
+                    options={makeStore.makes.map(({ _id, abrv }) => ({ value: _id, label: abrv }))}
                     className={styles.select}
                 />
             </div>

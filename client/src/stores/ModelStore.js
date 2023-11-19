@@ -1,6 +1,6 @@
 import { makeObservable, observable, flow } from 'mobx';
 import modelAPI from '../services/modelAPI';
-import FilterStore from './FilterStore';
+import filterStore from './FilterStore';
 
 class ModelStore {
     models = [];
@@ -28,7 +28,7 @@ class ModelStore {
     }
 
     *getModelsPageCount() {
-        this.modelsPageCount = yield modelAPI.getPageCount(FilterStore.paramsForPageCount, 9);
+        this.modelsPageCount = yield modelAPI.getPageCount(filterStore.paramsForPageCount, 9);
     }
 
     *createModel(data) {
@@ -43,7 +43,7 @@ class ModelStore {
 
     *deleteModel(id) {
         const model = yield modelAPI.deleteModel(id);
-        yield this.getModels(FilterStore.params);
+        yield this.getModels(filterStore.params);
         return model;
     }
 

@@ -1,7 +1,7 @@
 import yup from 'mobx-react-form/lib/validators/YUP';
 import * as $pkg from 'yup';
 import MobxReactForm from 'mobx-react-form';
-import ModelStore from '../stores/ModelStore';
+import modelStore from '../stores/ModelStore';
 
 const fields = [
     {
@@ -54,9 +54,9 @@ const hooks = {
         let response;
 
         if (values.id) {
-            response = await ModelStore.updateModel(values);
+            response = await modelStore.updateModel(values);
         } else {
-            response = await ModelStore.createModel(values);
+            response = await modelStore.createModel(values);
         }
 
         if (response._id) {

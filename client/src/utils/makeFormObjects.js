@@ -1,7 +1,7 @@
 import yup from 'mobx-react-form/lib/validators/YUP';
 import * as $pkg from 'yup';
 import MobxReactForm from 'mobx-react-form';
-import MakeStore from '../stores/MakeStore';
+import makeStore from '../stores/MakeStore';
 
 const fields = [
     {
@@ -45,7 +45,7 @@ const hooks = {
         const values = form.values();
         let response;
 
-        response = await MakeStore.createMake(values);
+        response = await makeStore.createMake(values);
 
         if (response._id) {
             alert('Make created');

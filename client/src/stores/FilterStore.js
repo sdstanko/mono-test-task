@@ -1,7 +1,7 @@
 import { makeObservable, observable, action } from 'mobx';
 import convertToParams from '../utils/convertToParams';
 
-class Filter {
+class FilterStore {
     paramsObj = {
         page: 'limit=9',
         makes: '',
@@ -18,6 +18,8 @@ class Filter {
             changeSort: action,
             changeMakes: action,
             changePage: action,
+            collectParams: action,
+            resetParams: action,
         });
     }
 
@@ -41,6 +43,10 @@ class Filter {
         this.params = params;
         this.paramsForPageCount = paramsForPageCount;
     }
+
+    resetParams() {
+        this.params = 'limit=9';
+    }
 }
 
-export default new Filter();
+export default new FilterStore();

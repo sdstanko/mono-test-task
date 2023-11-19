@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import ModelStore from '../../stores/ModelStore';
-import FilterStore from '../../stores/FilterStore';
+import modelStore from '../../stores/ModelStore';
+import filterStore from '../../stores/FilterStore';
 import styles from './Pagination.module.css';
 
 const Pagination = observer(() => {
@@ -10,16 +10,16 @@ const Pagination = observer(() => {
 
     useEffect(() => {
         getCountAndSetState();
-    }, [ModelStore.models]);
+    }, [modelStore.models]);
 
     const getCountAndSetState = async () => {
-        await ModelStore.getModelsPageCount();
-        setPagesCountArray([...Array(ModelStore.modelsPageCount).keys()]);
+        await modelStore.getModelsPageCount();
+        setPagesCountArray([...Array(modelStore.modelsPageCount).keys()]);
     };
 
     const clickHandler = (i) => {
         setActiveBtn(i);
-        FilterStore.changePage(i);
+        filterStore.changePage(i);
     };
 
     return (
