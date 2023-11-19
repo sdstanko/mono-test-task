@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import model from '../../stores/model';
+import ModelStore from '../../stores/ModelStore';
 import Button from '../UI/Button';
 import styles from './GridItem.module.css';
 
@@ -29,7 +29,7 @@ const GridItem = ({ item }) => {
                     <Button onClickAction={() => navigate(`/create/models/${item._id}`)}>
                         Edit
                     </Button>
-                    <Button onClickAction={() => model.deleteModel(item._id)} action="delete">
+                    <Button onClickAction={() => ModelStore.deleteModel(item._id)} action="delete">
                         Delete
                     </Button>
                 </div>

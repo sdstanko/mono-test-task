@@ -1,7 +1,9 @@
 import { Base } from './baseAPI';
 
-export class Make extends Base {
+class Make extends Base {
     constructor(endpoint) {
         super(endpoint);
     }
 }
+
+export default new Make('/makes');

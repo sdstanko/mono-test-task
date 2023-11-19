@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import model from '../../stores/model';
-import filter from '../../stores/filter';
+import ModelStore from '../../stores/ModelStore';
+import FilterStore from '../../stores/FilterStore';
 import styles from './Pagination.module.css';
-import { useState } from 'react';
 
 const Pagination = observer(() => {
     const [activeBtn, setActiveBtn] = useState(0);
@@ -11,16 +10,16 @@ const Pagination = observer(() => {
 
     useEffect(() => {
         getCountAndSetState();
-    }, [model.models]);
+    }, [ModelStore.models]);
 
     const getCountAndSetState = async () => {
-        await model.getModelsPageCount();
-        setPagesCountArray([...Array(model.modelsPageCount).keys()]);
+        await ModelStore.getModelsPageCount();
+        setPagesCountArray([...Array(ModelStore.modelsPageCount).keys()]);
     };
 
     const clickHandler = (i) => {
         setActiveBtn(i);
-        filter.changePage(i);
+        FilterStore.changePage(i);
     };
 
     return (

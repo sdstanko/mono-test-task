@@ -1,6 +1,6 @@
 import { Base } from './baseAPI';
 
-export class Model extends Base {
+class Model extends Base {
     constructor(endpoint) {
         super(endpoint);
     }
@@ -35,3 +35,5 @@ export class Model extends Base {
         return;
     }
 }
+
+export default new Model('/models');

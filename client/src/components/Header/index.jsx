@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <nav className={styles.header__nav}>
-				<Link to="models">
+				<Link to="/">
 					<Button>Models</Button>
 				</Link>
 				<Link to="makes">

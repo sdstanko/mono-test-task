@@ -1,7 +1,5 @@
 import { makeObservable, observable, flow } from 'mobx';
-import { Make } from '../services/makeAPI';
-
-const makeAPI = new Make('/makes');
+import makeAPI from '../services/makeAPI';
 
 class MakeStore {
     makes = [];
