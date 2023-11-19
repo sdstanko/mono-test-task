@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 const baseUrl = 'http://localhost:4000';
 
 export class Base {
@@ -8,11 +8,22 @@ export class Base {
     }
 
     async getAll(params) {
-        const { data } = await axios.get(this.url + (params ? `?${params}` : ''));
-        if (data?.status === 404) {
-            return []
+        let dataResponse;
+        try {
+            let data = await axios.get(this.url + (params ? `?${params}` : ''));
+            dataResponse = data.data
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                console.log(error)
+                return [];
+            }
         }
-        return data;
+
+        if (dataResponse?.status === 404) {
+            return [];
+        }
+
+        return dataResponse;
     }
 
     async getById(id) {

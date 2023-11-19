@@ -129,6 +129,10 @@ export class ModelModel {
 
         try {
             model = await Model.findByIdAndDelete(_id);
+            const make = await Make.findById(model.makeId);
+            const newModelsArr = make.models.filter((id) => id != _id);
+            await Make.findByIdAndUpdate(model.makeId, { models: newModelsArr });
+
         } catch (e) {}
 
         if (!model) {
